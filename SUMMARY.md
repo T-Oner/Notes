@@ -5,7 +5,7 @@
 ## 编程 <a id="programme"></a>
 
 * [算法](programme/algorithm/README.md)
-  * [图的搜索](programme/algorithm/tu-de-sou-suo.md)
+  * [图的搜索](programme/algorithm/图的搜索.md)
   * [狄克斯特拉算法](programme/algorithm/di-ke-si-te-la-suan-fa.md)
   * [贪婪算法](programme/algorithm/tan-lan-suan-fa.md)
 * [编程语言](programme/programmed-language/README.md)
