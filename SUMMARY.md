@@ -10,7 +10,8 @@
   * [Java](bian-cheng/hou-tai/java.md)
   * [Go](bian-cheng/hou-tai/go.md)
 * [数据分析](bian-cheng/shu-ju-fen-xi/README.md)
-  * [Python](bian-cheng/shu-ju-fen-xi/python.md)
+  * [Python](bian-cheng/shu-ju-fen-xi/python/README.md)
+    * [Pandas](bian-cheng/shu-ju-fen-xi/python/pandas.md)
 * [Coverity 编程质量](bian-cheng/coverity-bian-cheng-zhi-liang.md)
 
 ## 总结
