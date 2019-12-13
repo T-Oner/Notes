@@ -1,5 +1,7 @@
 # tmux
 
+![](../../.gitbook/assets/image%20%281%29.png)
+
 ## 什么是 Tmux
 
 tmux 是一个屏幕复用的工具，通俗的说就是让你的终端环境可以分屏。
