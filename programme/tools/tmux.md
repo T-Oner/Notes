@@ -1,7 +1,5 @@
 # tmux
 
-![tmux&#x7684;&#x8FD0;&#x884C;&#x6548;&#x679C;](../../.gitbook/assets/image%20%283%29.png)
-
 ## 什么是 Tmux
 
 tmux 是一个屏幕复用的工具，通俗的说就是让你的终端环境可以分屏。
