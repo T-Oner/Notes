@@ -4,7 +4,7 @@ description: 个人笔记
 
 # Notes
 
-此处存放生活和学习过程中的笔记和其他比较散乱的东西。可以前往[此处](https://toner.gitbook.io/notes/)，浏览比较友好。
+此处存放生活和学习过程中的笔记和其他比较散乱的东西。
 
 博客里的记录较为系统：[自学路漫漫](https://blog.fxcdev.com)
 

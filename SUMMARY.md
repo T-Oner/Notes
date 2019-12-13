@@ -39,7 +39,6 @@
   * [批量处理文件显示列表太长](bian-cheng/linux/pi-liang-chu-li-wen-jian-xian-shi-lie-biao-tai-chang.md)
   * [Ubuntu 安装 OpenJDK](bian-cheng/linux/ubuntu-an-zhuang-openjdk.md)
 * [通用框架](bian-cheng/tong-yong-kuang-jia/README.md)
-  * [Celery](bian-cheng/tong-yong-kuang-jia/celery.md)
   * [Redis](bian-cheng/tong-yong-kuang-jia/redis/README.md)
     * [Redis 安装](bian-cheng/tong-yong-kuang-jia/redis/redis-an-zhuang.md)
     * [Redis 的配置](bian-cheng/tong-yong-kuang-jia/redis/redis-de-pei-zhi/README.md)
@@ -49,9 +48,6 @@
     * [Redis 哈希\(Hash\)](bian-cheng/tong-yong-kuang-jia/redis/redis-ha-xi-hash.md)
     * [Redis 发布订阅](bian-cheng/tong-yong-kuang-jia/redis/redis-fa-bu-ding-yue.md)
     * [Redis 列表\(List\)](bian-cheng/tong-yong-kuang-jia/redis/redis-lie-biao-list.md)
-* [工具](bian-cheng/gong-ju/README.md)
-  * [tmux](bian-cheng/gong-ju/tmux.md)
-  * [Vim](bian-cheng/gong-ju/vim.md)
 
 ## 总结
 
