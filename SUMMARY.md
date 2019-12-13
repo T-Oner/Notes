@@ -64,4 +64,7 @@
 ## 生活
 
 * [乐理](sheng-huo/le-li.md)
+* [装修](sheng-huo/zhuang-xiu.md)
+* [摄影](sheng-huo/she-ying/README.md)
+  * [延时摄影时间间隔参考](sheng-huo/she-ying/yan-shi-she-ying-shi-jian-jian-ge-can-kao.md)
 
