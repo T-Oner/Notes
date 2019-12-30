@@ -41,3 +41,23 @@ TcpDump 可以将网络中传输的数据包的”头“完全截获下来提供
 因此采用 VLAN 名称作为 -i 的参数一般是用于对采用 Standard 作为 Virtual Server 类型的应用抓包时采用。
 
 注：如果 Virtual Server 是用 PVA 四层加速芯片作加速处理，则在 Virtual Server 的属性中 PVA Acceleration 显示为 Full。
+
+如果采用接口编号作为 -i 的参数，则进出该接口的数据包将先被镜像给 SCCP，然后送到主机板上通过 tcpdump 抓包。由于是直接镜像了端口，因此经由四层加速芯处理的数据包也能被 tcpdump 获取。
+
+采用接口编号作为 -i 的参数的局限性在于，由于数据包是经由 SCCP 转发给主机板，数据包的处理速度有限，每秒只能处理 200 个数据包。因此采用接口编号作为 -i 的参数一般是用于做基本网络故障诊断时。
+
+注：对于采用了 PVA 四层加速芯片加速处理的 Virtual，而且网络流量又比较大时，如果需要进行抓包分析，建议在上一级交换机作端口镜像，将网络流量输出到外部的抓包主机上处理。
+
+# tcpdump 命令中出现 “pcap_loop: Error: Interface packet capture  busy" 错误信息？
+
+同时执行多个 tcpdump，出现 “pcap_loop: Error: Interface packet capture  busy” 错误。
+
+这种情况一般只发生 tcpdump -i 参数采用接口编号时。原因主要在于当采用接口编号作为 -i 参数时，是通过 BIG-IP 的二层芯片将该接口的数据包镜像到中央 CPU 作处理。而 BIG-IP 的二层芯片的接口镜像功能不支持多个接口同时镜像，因此如果同时执行多个用接口名称作 -i 参数的 tcpdump 命令，就会出现 Interface packet capture busy 的信息。
+
+注：对于采用 VLAN 名称作为 tcpdump -i 参数，则不存在这个问题，可以支持对多个 VLAN 同时执行 tcpdump 抓包命令。
+
+# F5 总部建议抓包使用的参数
+
+`tcpdump -ni \<vlan name> -s 1600 -w /var/tmp/\<file name>`
+
+抓包时建议在 client 端，Bigip 的进出两端，server 端同时抓包。并使用 b conn 查看连接。
