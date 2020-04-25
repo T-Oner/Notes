@@ -1,5 +1,32 @@
 # Unix 基础知识
 
+## 程序和进程
+
+### fork
+
+fork 后，子进程究竟是重新走 main 函数，还是从 fork 处开始往下走？
+
+经过代码验证，是从 fork 处开始往下走：
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("main\n");
+    int pid = fork();
+    printf("%d\n", pid);
+}
+```
+
+输出：
+
+```shell
+➜  Desktop ./a.out
+main
+20822
+0
+```
+
 ## 出错处理
 
 Unix 中的出错处理分为两部分，一个是函数的返回，一个是 `errno` 。
