@@ -18,6 +18,10 @@
 
 # Combine-and-Async
 
+## 总结
+
+Combine 中最核心的两个角色：`Publisher` 和 `Operator`。Combine 编程中开发者的核心工作就是组合各种 `Operator` 来生成满足最终逻辑的 `Publisher`。
+
 ## 传统的异步 API
 
 - 闭包回调
@@ -57,7 +61,9 @@ publisher 可以发送三种事件
 
 ### Operator
 
-类似 rx 的操作符，构成一个由不同 Publisher 构成的链条
+类似 rx 的操作符，构成一个由不同 Publisher 构成的链条。
+
+`Operator` 是 `Publisher` 的 extension 中所提供的一些方法，比如 `flatMap` 和 `map`，他们都作用于 `Publisher`，而且会返回另一个 `Publisher`
 
 ### Subscriber
 
@@ -82,3 +88,93 @@ Subject 也是一个 Publisher。提供了将传统指令式异步 API 里的事
 ## 基础 Publisher
 
 `Empty`、`Just`、`Sequence`
+
+## Publisher 基本操作
+
+`map`、`reduce`、`scan`、`removeDuplicates`
+
+**reduce: **可以将数组中的元素按照某种规则进行合并，并得到一个最终的结果。
+
+```swift
+[1,2,3,4,5].reduce(0, +)
+// 15
+```
+
+**scan: **将中途的过程保存下来；`scan` 一个最常见的使用场景是在某个下载任务执行期间，接受 `URLSession` 的数据回调，将接收到的数据量做累加来提供一个下载进度条的界面。
+
+**removeDuplicates: **过滤掉重复的事件。
+
+```swift
+check("Remove Duplicates") {
+    ["S", "Sw", "Sw", "Sw", "Swi", 
+    "Swif", "Swift", "Swift", "Swif"]
+        .publisher
+        .removeDuplicates()
+}
+
+// 输出：
+// ----- Remove Duplicates -----
+// receive subscription: (["S", "Sw", "Swi", "Swif", "Swift", "Swif"])
+// request unlimited
+// receive value: (S)
+// receive value: (Sw)
+// receive value: (Swi)
+// receive value: (Swif)
+// receive value: (Swift)
+// receive value: (Swif)
+// receive finished
+```
+
+
+
+## map 的变种
+
+`compactMap` 和 `flatMap`
+
+**compactMap: ** 将 `map` 结果中那些 `nil` 的元素去除掉
+
+```swift
+check("Compact Map") {
+    ["1", "2", "3", "cat", "5"]
+        .publisher
+        .compactMap { Int($0) }
+}
+
+// 输出：
+// ----- Compact Map -----
+// receive subscription: ([1, 2, 3, 5])
+// request unlimited
+// receive value: (1)
+// receive value: (2)
+// receive value: (3)
+// receive value: (5)
+// receive finished
+```
+
+**flatMap: **`flatMap` 的变形闭包里需要返回一个 `Publisher`。也就是说，`flatMap` 将会涉及两个 `Publisher`：一个是 `flatMap` 操作本身所作用的外层 `Publisher`，一个是 `flatMap` 所接受的变形闭包中返回的内层 `Publisher`。`flatMap` 将外层 `Publisher` 发出的事件中的值传递给内层 `Publisher`，然后汇总内层 `Publisher` 给出的事件输出，作为最终变形后的结果。
+
+举个例子：flatMap 可以将多个层次的数据结构展平
+
+```swift
+check("Flat Map 1") {
+    [[1, 2, 3], ["a", "b", "c"]].publisher
+        .flatMap {
+            return $0.publisher
+    }
+}
+
+// 输出：
+// ----- Flat Map 1 -----
+// receive subscription: (FlatMap)
+// request unlimited
+// receive value: (1)
+// receive value: (2)
+// receive value: (3)
+// receive value: (a)
+// receive value: (b)
+// receive value: (c)
+// receive finished
+```
+
+## 嵌套的泛型类型和类型摸消
+
